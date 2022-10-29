@@ -1,0 +1,36 @@
+version: '3'
+services:
+  dapr-sample:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Dapr instances communicate over gRPC so we need to expose the gRPC port
+    depends_on:
+      - placement
+    networks:
+      - hello-dapr
+
+  nodeapp-dapr:
+    image: "daprio/daprd:edge"
+    command: [
+      "./daprd",
+      "--app-id", "nodeapp",
+      "--app-port", "3000",
+      "--placement-host-address", "placement:50006", # Dapr's placement service can be reach via the docker DNS entry
+      "--components-path", "./components"
+    ]
+    volumes:
+      - "./components/:/components" # Mount our components folder for the runtime to use. The mounted location must match the --components-path argument.
+    depends_on:
+      - dapr-sample
+    network_mode: "service:dapr-sample" # Attach the nodeapp-dapr service to the nodeapp network namespace
+
+  placement:
+    image: "daprio/dapr"
+    command: ["./placement", "--port", "50006"]
+    ports:
+      - "50006:50006"
+  
+networks:
+  hello-dapr:

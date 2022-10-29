@@ -1,0 +1,3 @@
+### Hello world
+GET http://localhost:5269
+Accept: application/json
