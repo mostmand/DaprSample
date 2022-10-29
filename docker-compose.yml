@@ -2,7 +2,7 @@ version: '3'
 services:
   dapr-sample:
     build:
-      context: ./
+      context: .
       dockerfile: Dockerfile
     ports:
       - "3000:80" # Dapr instances communicate over gRPC so we need to expose the gRPC port

@@ -5,7 +5,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{CA62E066-6C9F-4A39-B5B1-E206C00E3A17}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
-		Dockerfile = Dockerfile
+		DaprSample\Dockerfile = DaprSample\Dockerfile
 	EndProjectSection
 EndProject
 Global
