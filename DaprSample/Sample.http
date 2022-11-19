@@ -1,3 +1,4 @@
 ### Hello world
-GET http://localhost:3000
+GET http://localhost:3500/hello
 Accept: application/json
+dapr-app-id: myapp
