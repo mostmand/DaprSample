@@ -12,11 +12,11 @@ services:
       - dapr-sidecar-network
 
   myapp-dapr:
-    image: "daprio/daprd:1.9.3"
+    image: "daprio/daprd:latest"
     command: [
       "./daprd",
       "--app-id", "myapp",
-      "--app-port", "80",
+      "--app-port", "5000",
       "--placement-host-address", "placement:50006", # Dapr's placement service can be reach via the docker DNS entry
       "--components-path", "./components"
     ]
@@ -27,7 +27,7 @@ services:
     network_mode: "service:myapp" # Attach the nodeapp-dapr service to the nodeapp network namespace
 
   placement:
-    image: "daprio/dapr:1.9.3"
+    image: "daprio/dapr:latest"
     command: ["./placement", "--port", "50006"]
     ports:
       - "50006:50006"
